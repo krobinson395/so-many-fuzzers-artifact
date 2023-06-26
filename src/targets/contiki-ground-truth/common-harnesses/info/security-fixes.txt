@@ -19,4 +19,4 @@ srh-param                1183            ebd4cae4458b30f7897083182fda35f180809c5
 uip-len                  871             8340735cf51f96eeaeb36f07dbd4a7b5e32f0ff0        b5d997fb5cbe20ac9812558eb71bda746142a253
 uip-ext-hdr              867             b5d997fb5cbe20ac9812558eb71bda746142a253        150a3feb91bd196e52cfd7c293b98b65f439a215
 uip-overflow             813             ea6c68880a9f718749f802938160bc39c0856c74        a1cba5607c44514a9644333b6ca0a9a5e0f3c59e
-uip-fuzz-test            000             59b249455de109cb587ea3d9fa4869c0f30e0bc7        186ca81a109cd3c733f667797ef46828523161a0
+uip-fuzz-test            000             7848af3000d0f7fa87afe69027f8a059190cd60d        73d47a8369b1af92fee6bf43efa82fb47c6451eb
