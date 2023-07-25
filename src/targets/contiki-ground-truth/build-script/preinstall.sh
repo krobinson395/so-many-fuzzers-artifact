@@ -4,7 +4,8 @@ set -e
 ## Install dependencies
 apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-        valgrind
+        valgrind \
+	libpcap-dev
 
 clang_version=$(clang -dumpversion 2>/dev/null | cut -d'.' -f1-1)
 if [[ -z "${clang_version}" || ${clang_version} -lt 8 ]];

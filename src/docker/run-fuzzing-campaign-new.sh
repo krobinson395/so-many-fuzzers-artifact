@@ -231,6 +231,7 @@ function run_trial {
     -v  ${input_sync}:${WORKDIR_PATH}/input \
     -v  ${shared_folder}:${WORKDIR_PATH}/shared \
     ${tmpfs_option} \
+    --mount type=bind,source=/home/robin489/researchTools/so-many-fuzzers-artifact/coverageFiles,target=/home/benchng/software/coverageData \
     ${TAG} \
     bash -c "source ${WORKDIR_PATH}/.bashrc \
      && cd script \

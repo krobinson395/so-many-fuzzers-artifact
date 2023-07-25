@@ -1,0 +1,4 @@
+Error: Failed to open the fuzzer's stats at /home/benchng/shared/sync_folder/afl-slave/fuzzer_stats
+
+Caused by:
+    No such file or directory (os error 2)

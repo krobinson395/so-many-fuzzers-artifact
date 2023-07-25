@@ -66,12 +66,16 @@ ENV SOFTWARE_PATH     ${WORKDIR_PATH}/software
 ENV HARNESS_PATH      ${SOFTWARE_PATH}/${TRIAL_HARNESS}
 
 RUN  mkdir            ${SOFTWARE_PATH}
+RUN  mkdir            ${SOFTWARE_PATH}/coverageData
 RUN  mkdir            ${HARNESS_PATH}
 
 COPY ${CONTIKI_TARGET}/common-harnesses  ${HARNESS_PATH}
 COPY ${CONTIKI_HARNESS}                  ${HARNESS_PATH}
 
 RUN  chown -R ${USER_NAME}:${USER_NAME}  ${SOFTWARE_PATH}
+
+## --- Set Coverage Environment Vars ---
+ENV LLVM_PROFILE_FILE = ${SOFTWARE_PATH}/coverageData/rawFile%p
 ######
 
 ##

@@ -1,0 +1,7 @@
+- Collecting crashes from afl-master -
+Error while reading /home/benchng/shared/sync_folder/afl-master/plot_data
+
+ -- Crash triage for Contiki-NG Ground Truth experiments -- 
+
+[+] Working directory:  /home/benchng/validation
+Error: No crashing inputs found
