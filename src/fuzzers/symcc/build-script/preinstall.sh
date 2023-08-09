@@ -4,8 +4,8 @@ set -e
 apt-get update \
     && apt -y dist-upgrade \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+        clang \
 	cargo \
-	clang-10 \
 	g++ \
 	libz3-dev \
 	llvm-10-dev \
@@ -15,7 +15,15 @@ apt-get update \
         ninja-build \
         zlib1g \
         zlib1g-dev
-
+git clone -b release/14.x https://github.com/llvm/llvm-project /usr/lib/llvmTest
+cd /usr/lib/llvmTest
+mkdir build
+cd build
+cmake -DLLVM_ENABLE_PROJECTS=clang -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RUNTIMES=compiler-rt -G "Unix Makefiles" ../llvm
+make -j 16
+#cp ./bin/clang-14 /usr/bin/clang-14
+#cd ../..
+#cp -r llvmTest /usr/local/sbin
 # Set default clang/llvm suite (from magma)
 update-alternatives \
   --install /usr/lib/llvm              llvm             /usr/lib/llvm-10  20 \
@@ -42,7 +50,7 @@ update-alternatives \
   --slave   /usr/bin/llvm-tblgen       llvm-tblgen      /usr/bin/llvm-tblgen-10
 
 update-alternatives \
-  --install /usr/bin/clang             clang            /usr/bin/clang-10  20 \
+  --install /usr/bin/clang             clang            /usr/bin/clang-10 20\
   --slave   /usr/bin/clang++           clang++          /usr/bin/clang++-10 \
   --slave   /usr/bin/clang-cpp         clang-cpp        /usr/bin/clang-cpp-10
 

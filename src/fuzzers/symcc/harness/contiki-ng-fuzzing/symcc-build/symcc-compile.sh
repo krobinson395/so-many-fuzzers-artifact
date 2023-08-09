@@ -14,7 +14,9 @@ LDFLAGS+=" -fprofile-instr-generate -fcoverage-mapping"
 if [[ -z "${SYMCC_PATH}" ]]; then
   CC=symcc CFLAGS=${CFLAGS} LDFLAGS=${LDFLAGS} LD_OVERRIDE=symcc make TARGET=native ${HARNESS_NAME} WERROR=0
 else
-  CC=${SYMCC_PATH}/symcc_build/symcc CFLAGS=${CFLAGS} LD_OVERRIDE=${SYMCC_PATH}/symcc_build/symcc make TARGET=native ${HARNESS_NAME} WERROR=0
+  CC=${SYMCC_PATH}/symcc_build/symcc CFLAGS=${CFLAGS} LDFLAGS=${LDFLAGS} LD_OVERRIDE=${SYMCC_PATH}/symcc_build/symcc make TARGET=native ${HARNESS_NAME} WERROR=0
 fi
 
+mkdir ${SOFTWARE_PATH}/contikiBinary
+cp ${HARNESS_NAME}.native ${SOFTWARE_PATH}/contikiBinary/${HARNESS_NAME}.native
 mv ${HARNESS_NAME}.native bin/${HARNESS_NAME}.symcc

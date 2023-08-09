@@ -5,7 +5,8 @@ set -e
 #AFL_PATH
 #LLVM_PATH
 #SYMCC_PATH
-
+export SYMCC_CC=/usr/lib/llvmTest/build/bin/clang-14
+export SYMCC_CXX=/usr/lib/llvmTest/build/bin/clang++
 export CC=clang-10
 export CXX=clang++-10
 
@@ -27,8 +28,8 @@ git clone https://github.com/eurecom-s3/symcc ${SYMCC_PATH} \
 mkdir ${SYMCC_PATH}/symcc_build_simple \
     && cd ${SYMCC_PATH}/symcc_build_simple \
     && cmake -G Ninja \
-	-DCMAKE_C_COMPILER=${CC} \
-        -DCMAKE_CXX_COMPILER=${CXX} \
+	-DCMAKE_C_COMPILER=${SYMCC_CC} \
+        -DCMAKE_CXX_COMPILER=${SYMCC_CXX} \
         -DLLVM_DIR="$(llvm-config --cmakedir)" \
         -DQSYM_BACKEND=OFF \
         -DCMAKE_BUILD_TYPE=RelWithDebInfo \
@@ -40,8 +41,8 @@ mkdir ${SYMCC_PATH}/symcc_build_simple \
 mkdir ${SYMCC_PATH}/symcc_build \
     && cd ${SYMCC_PATH}/symcc_build \
     &&  cmake -G Ninja \
-        -DCMAKE_C_COMPILER=${CC} \
-        -DCMAKE_CXX_COMPILER=${CXX} \
+        -DCMAKE_C_COMPILER=${SYMCC_CC} \
+        -DCMAKE_CXX_COMPILER=${SYMCC_CXX} \
         -DLLVM_DIR="$(llvm-config --cmakedir)" \
         -DQSYM_BACKEND=ON \
         -DCMAKE_BUILD_TYPE=RelWithDebInfo \

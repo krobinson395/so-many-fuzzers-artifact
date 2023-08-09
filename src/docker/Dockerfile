@@ -1,6 +1,6 @@
 ARG  OS_VERSION=ubuntu:20.04
 FROM $OS_VERSION
-
+#ARG CACHE_DATE=not_a_dates
 ARG USER_ID=1000
 ARG GROUP_ID=1000
 ARG USER_NAME=benchng
@@ -58,7 +58,7 @@ RUN   chown -R ${USER_NAME}:${USER_NAME} ${WORKDIR_PATH}/target \
 ENV SHARED   ${WORKDIR_PATH}/shared
 RUN mkdir -p ${SHARED} \
    && chown ${USER_NAME}:${USER_NAME} ${SHARED} \
-   && chmod 744 ${SHARED}
+   && chmod 777 ${SHARED}
 ######
 
 ## --- Create Harness folder ---
@@ -75,7 +75,11 @@ COPY ${CONTIKI_HARNESS}                  ${HARNESS_PATH}
 RUN  chown -R ${USER_NAME}:${USER_NAME}  ${SOFTWARE_PATH}
 
 ## --- Set Coverage Environment Vars ---
-ENV LLVM_PROFILE_FILE = ${SOFTWARE_PATH}/coverageData/rawFile%p
+RUN touch             ${SHARED}/testFile
+RUN echo "TEST" >> ${SHARED}/testFile
+RUN echo "TEST2" >> ${SHARED}/anotherTestFile
+ENV LLVM_PROFILE_FILE = ${SHARED}/rawData%p.instr
+ENV TEST_VAR = ATESTVAR
 ######
 
 ##

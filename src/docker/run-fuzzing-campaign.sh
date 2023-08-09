@@ -163,7 +163,8 @@ then
   fi
   echo "  - use ${dockerfile}";
   echo "  - with OS ${OS_VERSION}"
-  docker build \
+  echo "CHANGES TOOK EFFECT REGULAR FILE"
+  docker build --no-cache\
     --build-arg OS_VERSION=${OS_VERSION} \
     --build-arg TRIAL_FUZZER=${TRIAL_FUZZER} --build-arg TRIAL_TARGET=${TRIAL_TARGET} --build-arg TRIAL_HARNESS=${TRIAL_HARNESS} \
     --build-arg USER_ID=$(id -u ${USER}) --build-arg GROUP_ID=$(id -g ${USER}) \
@@ -204,13 +205,14 @@ function run_trial {
     exit 1
   fi
   mkdir "${shared_folder}"
+  echo "Running expected file" > ${shared_folder}/container.log
 
-  echo "[+] Start ${TAG} output folder:"                      >  ${shared_folder}/container.log &
+  echo "[+] Start ${TAG} output folder:"                      >>  ${shared_folder}/container.log &
   cid=$(docker run -dt --rm --security-opt seccomp:unconfined \
     -v  ${shared_folder}:${WORKDIR_PATH}/shared \
     ${tmpfs_option} \
     ${TAG} \
-    bash -c "source ${WORKDIR_PATH}/.bashrc \
+    bash -c "source ${WORKDIR_PATH}/.bashrc && ls ${WORKDIR_PATH}/shared >> ${WORKDIR_PATH}/shared/container.log \
      && cd script \
      && ./fuzz-and-validate.sh ${TIMEOUT}")
   container_id=$(cut -c-12 <<< $cid$)

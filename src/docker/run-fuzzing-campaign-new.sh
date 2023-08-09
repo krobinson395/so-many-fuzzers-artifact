@@ -174,6 +174,7 @@ then
   echo "  - use ${dockerfile}";
   echo "  - with OS ${OS_VERSION}"
   docker build \
+    --build-arg CACHE_DATE=$(date +%Y-%m-%d:%H:%M:%S) \
     --build-arg OS_VERSION=${OS_VERSION} \
     --build-arg TRIAL_FUZZER=${TRIAL_FUZZER} --build-arg TRIAL_TARGET=${TRIAL_TARGET} --build-arg TRIAL_HARNESS=${TRIAL_HARNESS} \
     --build-arg USER_ID=$(id -u ${USER}) --build-arg GROUP_ID=$(id -g ${USER}) \
